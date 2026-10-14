@@ -61,9 +61,19 @@ if (/gem 'al_math',\s*:git =>/.test(gemfile)) {
   failures.push("`Gemfile` must not use git-branch pin for `al_math`; use released gem version.");
 }
 
-for (const forbiddenPath of ["_includes", "_layouts", "_sass", "_scripts", "assets/tailwind", "tailwind.config.js", "assets/webfonts"]) {
+for (const forbiddenPath of ["_layouts", "_sass", "_scripts", "assets/tailwind", "tailwind.config.js", "assets/webfonts"]) {
   if (exists(forbiddenPath)) {
     failures.push(`Starter must not own core component path \`${forbiddenPath}\`; move ownership to the corresponding gem.`);
+  }
+}
+
+// This academic site intentionally overrides only the header to keep branding
+// stable between home and subpages. Other shared runtime copies remain forbidden.
+if (exists("_includes")) {
+  const entries = fs.readdirSync(path.join(root, "_includes"));
+  const manifest = exists(".al-folio-overrides.yml") ? read(".al-folio-overrides.yml") : "";
+  if (entries.length !== 1 || entries[0] !== "header.liquid" || !manifest.includes("_includes/header.liquid")) {
+    failures.push("Only the acknowledged site header override is permitted in _includes.");
   }
 }
 

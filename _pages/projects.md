@@ -1,11 +1,10 @@
 ---
 layout: page
-title: research
+title: Research
 permalink: /projects/
 description: Learning representations and priors for observation-driven scientific inference.
 nav: true
 nav_order: 3
-display_categories: [research]
 horizontal: false
 ---
 

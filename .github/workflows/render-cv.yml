@@ -9,6 +9,15 @@ on:
       - "assets/rendercv/design.yaml"
       - "assets/rendercv/locale.yaml"
       - "assets/rendercv/settings.yaml"
+      - "requirements.txt"
+      - ".github/workflows/render-cv.yml"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "_data/cv.yml"
+      - "assets/rendercv/**"
+      - "requirements.txt"
+      - ".github/workflows/render-cv.yml"
   workflow_call:
   workflow_dispatch:
 permissions:
@@ -50,9 +59,14 @@ jobs:
           name: RenderCV Output
           path: assets/rendercv/rendercv_output
       - name: Push the changes
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git add -A
+          git add assets/rendercv/rendercv_output
+          if git diff --cached --quiet; then
+            echo "Rendered CV is unchanged."
+            exit 0
+          fi
           git commit -m "chore: render the latest CV"
           git push
