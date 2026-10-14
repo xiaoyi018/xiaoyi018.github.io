@@ -1,12 +1,58 @@
 ---
-layout: cv
+layout: page
 permalink: /cv/
 title: CV
 nav: true
 nav_order: 5
-cv_pdf: /assets/pdf/example_pdf.pdf # you can also use external links here
-cv_format: rendercv # options: rendercv, jsonresume
-description: This is a description of the page. You can modify it in '_pages/cv.md'. You can also change or remove the top pdf download button.
-toc:
-  sidebar: left
+description: Education, research experience, service, and honors.
 ---
+
+## Education
+
+**Tsinghua University**, Beijing, China  
+Ph.D. in Computer Science and Technology, 2022–present (expected summer 2027). Advisor: Prof. Wei Xue.  
+B.S. in Mathematics and Physics, 2018–2022.
+
+## Research interests
+
+Scientific machine learning; AI for Science; generative models for dynamical systems; scientific inverse problems; data assimilation.
+
+## Research experience
+
+**Mohamed bin Zayed University of Artificial Intelligence**, October 2025–May 2026  
+WindINR: latent-state implicit neural representations for local wind query and correction. Project mentors and collaborators: Xiaosong Ma, Pascal Fua, and Robert Jenssen.
+
+**Mohamed bin Zayed University of Artificial Intelligence**, October 2025–February 2026  
+MonodVI: mechanistically constrained deep generative modeling of spliced and unspliced RNA. Project mentors and collaborators: Xiaosong Ma and Le Song. Incorporated a steady-state Monod likelihood into variational inference to learn cell-level representations from paired RNA measurements.
+
+**Tsinghua University and Shanghai AI Lab**, November 2023–October 2025  
+Joint research on FengWu-4DVar, VAE-Var, and LoRA-EnVar. Project mentors and collaborators: Wei Xue, Lei Bai, and Ben Fei. Developed differentiable forecast–assimilation systems, non-Gaussian generative priors, and parameter-efficient ensemble adaptation.
+
+**Tsinghua University, HPCA Lab**, January 2021–November 2023  
+DNN-integrated ensemble data assimilation, advised by Wei Xue. Developed neural surrogates for ensemble perturbation generation to accelerate assimilation workflows.
+
+## Publications
+
+See the [publications page]({{ '/publications/' | relative_url }}) for selected papers, preprints, and conference abstracts.
+
+## Academic service
+
+Reviewer for ICML 2025, NeurIPS 2025, ICLR 2026, and ICML 2026 (**Gold Reviewer**).
+
+## Awards and honors
+
+- **EGU Outstanding Student and PhD Candidate Presentation Award**, 2025.
+- **China National Scholarship**, 2024–2025 (awarded December 2024).
+- **Hesheng Award for Comprehensive Excellence**, 2020–2021.
+- **Hengda Award for Comprehensive Excellence**, 2019–2020.
+- **Academic Excellence Award**, 2018–2019.
+
+## Technical skills and languages
+
+Programming: Python, C/C++, Java, MATLAB.  
+Parallel computing: MPI, OpenMP, CUDA.  
+Languages: Mandarin (native), English (proficient).
+
+## Contact
+
+[yi.xiao.research@gmail.com](mailto:yi.xiao.research@gmail.com) · [Google Scholar](https://scholar.google.com/citations?user=eISo_ToAAAAJ) · [GitHub](https://github.com/xiaoyi018)

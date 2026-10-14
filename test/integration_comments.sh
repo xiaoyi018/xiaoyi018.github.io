@@ -18,6 +18,9 @@ giscus:
   category_id: DIC_kwDOExample
 YAML
 
+# Demo posts are test fixtures; keep them excluded from the public site.
+ruby -rpsych -e 'cfg = Psych.unsafe_load_file("_config.yml"); puts({ "exclude" => Array(cfg["exclude"]).reject { |path| path.sub(%r{/$}, "") == "_posts" } }.to_yaml.sub(/\A---\s*\n/, ""))' >>"${tmp_override}"
+
 bundle exec jekyll build --config "_config.yml,${tmp_override}" -d "${tmp_site}" >/dev/null
 
 giscus_page="${tmp_site}/blog/2022/giscus-comments/index.html"
