@@ -16,7 +16,7 @@ for (const theme of ["light", "dark"]) {
       await page.addInitScript((value) => localStorage.setItem("theme", value), theme);
       const response = await page.goto(`/al-folio/${route}`, { waitUntil: "load" });
       expect(response.status()).toBe(200);
-      await expect(page.locator("body")).toContainText(content);
+      await expect(page.locator('[role="main"]')).toContainText(content);
       await expect(page.locator("body")).not.toContainText("Albert Einstein");
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       expect(overflow).toBeLessThanOrEqual(2);
@@ -28,6 +28,7 @@ for (const theme of ["light", "dark"]) {
 
 test("all four research project links open", async ({ page }) => {
   await page.goto("/al-folio/projects/");
+  await expect(page.locator(".projects .card-title")).toHaveCount(4);
   const links = await page.locator('.projects a[href*="/projects/"]').evaluateAll((nodes) => [...new Set(nodes.map((node) => node.href))]);
   expect(links).toHaveLength(4);
   for (const link of links) {
@@ -105,7 +106,7 @@ test("publication filter and citation disclosure work", async ({ page }) => {
   await expect(bib).not.toHaveClass(/open/);
   await page.locator("#xiao2025lora a.bibtex").click();
   await expect(bib).toHaveClass(/open/);
-  expect((await bib.boundingBox()).height).toBeGreaterThan(20);
+  await expect.poll(async () => (await bib.boundingBox()).height).toBeGreaterThan(20);
   await page.locator("#xiao2025lora a.bibtex").click();
   await expect(bib).not.toHaveClass(/open/);
 });
