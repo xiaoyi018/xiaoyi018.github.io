@@ -1,0 +1,10 @@
+---
+version: 1
+overrides:
+  _includes/header.liquid:
+    owner: al_folio_core
+    gem_version: 1.0.11
+    upstream_path: _includes/header.liquid
+    upstream_sha256: c8663513baded68d9fa5fbe4d6363a976535bbe201efe5138243d0ff03101058
+    local_sha256: 8adce9a0ad0c323c52e4b85bca41973f72ef32dc2fdda163aa5411b922cffe7a
+    acknowledged_at: "2026-10-15"

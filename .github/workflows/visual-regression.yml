@@ -5,6 +5,8 @@ on:
     branches: [main, master, v1.0-dev]
     paths:
       - "_config.yml"
+      - "_includes/**"
+      - ".al-folio-overrides.yml"
       - "_data/**"
       - "_bibliography/**"
       - "_pages/**"
@@ -21,6 +23,8 @@ on:
     branches: [v1.0-dev]
     paths:
       - "_config.yml"
+      - "_includes/**"
+      - ".al-folio-overrides.yml"
       - "_data/**"
       - "_bibliography/**"
       - "_pages/**"
@@ -73,9 +77,20 @@ jobs:
       - name: Install Playwright browser 🧪
         run: npx playwright install --with-deps chromium webkit
 
+      - name: Build and optimize the production site 🧱
+        env:
+          JEKYLL_ENV: production
+        run: |
+          bundle exec jekyll build --baseurl /al-folio
+          npx purgecss -c purgecss.config.js
+          mkdir -p /tmp/academic-preview
+          ln -s "$PWD/_site" /tmp/academic-preview/al-folio
+
       # The upstream parity suite requires demo content and a v0.16.3 tag.
       # This customized site validates its actual pages instead.
       - name: Check academic site in desktop and mobile browsers 👀
+        env:
+          SITE_PREBUILT: "1"
         run: npm run test:visual -- site.spec.js --reporter=line,html
 
       - name: Upload Playwright report 📄
