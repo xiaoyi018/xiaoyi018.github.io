@@ -21,6 +21,12 @@ for (const theme of ["light", "dark"]) {
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       expect(overflow).toBeLessThanOrEqual(2);
       expect(errors).toEqual([]);
+      // Scroll through lazy figures before taking the full-page QA screenshot.
+      for (const img of await page.locator(".research-feature img").all()) {
+        await img.scrollIntoViewIfNeeded();
+        await expect.poll(() => img.evaluate((node) => node.complete && node.naturalWidth > 0)).toBeTruthy();
+      }
+      await page.evaluate(() => window.scrollTo(0, 0));
       await testInfo.attach("page", { body: await page.screenshot({ fullPage: true }), contentType: "image/png" });
     });
   }
@@ -123,4 +129,44 @@ test("search contains the site's real pages and no demo entries", async ({ page 
   await expect(search).toContainText("WindINR");
   await expect(search).not.toContainText("Einstein");
   await expect(search).not.toContainText("a post with");
+});
+
+test("full CV can be downloaded from home and the CV page", async ({ page, request }) => {
+  const crypto = require("node:crypto");
+  const fs = require("node:fs");
+  const path = require("node:path");
+  const pdfPath = "/al-folio/assets/pdf/Yi_Xiao_CV.pdf";
+  const response = await request.get(pdfPath);
+  expect(response.ok()).toBeTruthy();
+  expect(response.headers()["content-type"]).toContain("application/pdf");
+  const body = await response.body();
+  expect(body.subarray(0, 5).toString()).toBe("%PDF-");
+  const expected = fs.readFileSync(path.resolve(__dirname, "../../assets/pdf/Yi_Xiao_CV.pdf"));
+  expect(crypto.createHash("sha256").update(body).digest("hex")).toBe(crypto.createHash("sha256").update(expected).digest("hex"));
+  for (const route of ["", "cv/"]) {
+    await page.goto(`/al-folio/${route}`);
+    const link = page.getByRole("link", { name: "Download full CV (PDF)", exact: true });
+    await expect(link).toHaveAttribute("href", pdfPath);
+    const [download] = await Promise.all([page.waitForEvent("download"), link.click()]);
+    expect(download.suggestedFilename()).toBe("Yi_Xiao_CV.pdf");
+    expect(await download.failure()).toBeNull();
+  }
+});
+
+test("selected research figures load and their details links resolve", async ({ page, request }) => {
+  await page.goto("/al-folio/");
+  const cards = page.locator(".research-feature");
+  await expect(cards).toHaveCount(4);
+  for (const card of await cards.all()) {
+    const img = card.locator("img");
+    await img.scrollIntoViewIfNeeded();
+    await expect.poll(() => img.evaluate((node) => node.complete && node.naturalWidth > 0)).toBeTruthy();
+    await expect(img).toHaveAttribute("alt", /.+/);
+    const imageResponse = await request.get(await card.locator(".research-figure").getAttribute("href"));
+    expect(imageResponse.ok()).toBeTruthy();
+    const details = await card.getByRole("link", { name: "Details", exact: true }).getAttribute("href");
+    const response = await request.get(details);
+    expect(response.ok()).toBeTruthy();
+    expect(await response.text()).toContain(await card.locator("h3").innerText());
+  }
 });

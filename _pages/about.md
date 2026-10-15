@@ -6,7 +6,7 @@ subtitle: Ph.D. Student · Computer Science and Technology · Tsinghua Universit
 profile:
   align: right
   image: false
-selected_papers: true
+selected_papers: false
 social: true
 announcements:
   enabled: false
@@ -14,10 +14,16 @@ latest_posts:
   enabled: false
 ---
 
-I am **Yi Xiao (肖懿)**, a Ph.D. student in the Department of Computer Science and Technology at Tsinghua University, advised by Prof. Wei Xue. I received my B.S. in Mathematics and Physics from Tsinghua University in 2022 and expect to complete my Ph.D. in summer 2027.
+I am **Yi Xiao (肖懿)**, a Ph.D. student in Computer Science and Technology at Tsinghua University, advised by Prof. Wei Xue. I received my B.S. in Mathematics and Physics from Tsinghua in 2022 and expect to graduate in summer 2027.
 
-My research focuses on **scientific machine learning, data assimilation, and generative modeling for dynamical systems**, with a particular emphasis on weather and atmospheric flows. I develop methods that combine learned representations with sparse observations to infer physical states and improve forecasts. A central question in my work is how to make learned priors useful for scientific inference while retaining efficient online updates and compatibility with physical observation operators.
+**How can we infer the state of a physical system from sparse observations?** I study this question at the intersection of scientific machine learning, data assimilation, and generative modeling, with weather and atmospheric flows as a central application. My work combines learned priors with observation operators to estimate physical states and their uncertainty, while enabling efficient updates as new measurements arrive.
 
-My work spans differentiable forecast–assimilation systems (**FengWu-4DVar**), non-Gaussian generative priors (**VAE-Var**), flow-dependent ensemble adaptation (**LoRA-EnVar**), and continuous local wind estimation from sparse observations (**WindINR**). I have collaborated with researchers at Shanghai AI Lab and Mohamed bin Zayed University of Artificial Intelligence. My broader interests include uncertainty quantification and mechanistically constrained generative models for scientific inverse problems.
+My research connects differentiable forecast–assimilation systems, non-Gaussian background-error modeling, ensemble-informed adaptation, and continuous local wind reconstruction. More broadly, I am interested in representations that make scientific inference accurate, adaptable, and computationally practical.
 
-Explore my [research projects]({{ '/projects/' | relative_url }}), [publications]({{ '/publications/' | relative_url }}), and [CV]({{ '/cv/' | relative_url }}). For research inquiries, please contact [yi.xiao.research@gmail.com](mailto:yi.xiao.research@gmail.com).
+<div class="profile-actions">
+  <a class="btn btn-sm z-depth-0" href="{{ '/assets/pdf/Yi_Xiao_CV.pdf' | relative_url }}" download="Yi_Xiao_CV.pdf">Download full CV (PDF)</a>
+  <a href="{{ '/publications/' | relative_url }}">All publications</a>
+  <a href="mailto:yi.xiao.research@gmail.com">Email</a>
+</div>
+
+{% include selected_research.liquid %}

@@ -1,0 +1,44 @@
+<section class="selected-research" aria-labelledby="selected-research-heading">
+  <h2 id="selected-research-heading">Selected research</h2>
+  <p>
+    From global forecast–assimilation cycles to local wind inference: learning priors, adapting uncertainty, and updating physical states from
+    observations.
+  </p>
+  <div class="research-grid">
+    {% for work in site.data.selected_research %}
+      <article class="research-feature">
+        <a class="research-figure" href="{{ work.image | relative_url }}" aria-label="View full figure for {{ work.title }}">
+          <img
+            src="{{ work.image | relative_url }}"
+            alt="{{ work.alt }}"
+            width="{{ work.width }}"
+            height="{{ work.height }}"
+            loading="lazy"
+            decoding="async"
+          >
+        </a>
+        <div class="research-feature-body">
+          <p class="research-venue">{{ work.venue }}</p>
+          <h3>
+            <a href="{{ work.project | relative_url }}">{{ work.title }}</a>
+          </h3>
+          <p>{{ work.summary }}</p>
+          <p class="research-links">
+            <a href="{{ work.paper }}">Paper</a>
+            {% if work.code -%}
+              <a href="{{ work.code }}">Code</a>
+            {%- endif %}
+            {% if work.poster_file %}
+              <a href="{{ work.poster_file | relative_url }}">Poster (PDF)</a>
+            {% endif %}
+            {% if work.poster -%}
+              <a href="{{ work.poster }}">Conference poster</a>
+            {%- endif %}
+            <a href="{{ work.project | relative_url }}">Details</a>
+          </p>
+          <p class="research-source">{{ work.source }}. Click the image to enlarge.</p>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>

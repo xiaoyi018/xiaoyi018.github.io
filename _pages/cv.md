@@ -7,6 +7,13 @@ nav_order: 5
 description: Education, research experience, service, and honors.
 ---
 
+<p class="profile-actions">
+  <a class="btn btn-sm z-depth-0" href="{{ '/assets/pdf/Yi_Xiao_CV.pdf' | relative_url }}" download="Yi_Xiao_CV.pdf">Download full CV (PDF)</a>
+  <a href="{{ '/assets/pdf/Yi_Xiao_CV.pdf' | relative_url }}">View PDF</a>
+</p>
+
+The complete two-page CV is available above; a summary follows below.
+
 ## Education
 
 **Tsinghua University**, Beijing, China  
