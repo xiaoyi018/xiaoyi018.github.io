@@ -21,6 +21,12 @@ for (const theme of ["light", "dark"]) {
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       expect(overflow).toBeLessThanOrEqual(2);
       expect(errors).toEqual([]);
+      // Scroll through lazy figures before taking the full-page QA screenshot.
+      for (const img of await page.locator(".research-feature img").all()) {
+        await img.scrollIntoViewIfNeeded();
+        await expect.poll(() => img.evaluate((node) => node.complete && node.naturalWidth > 0)).toBeTruthy();
+      }
+      await page.evaluate(() => window.scrollTo(0, 0));
       await testInfo.attach("page", { body: await page.screenshot({ fullPage: true }), contentType: "image/png" });
     });
   }

@@ -31,6 +31,9 @@ button:focus-visible {
   color: var(--global-theme-color);
   margin: 0;
   text-transform: none;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  padding: 0.5rem 0.9rem;
 }
 .selected-research {
   margin-top: 2.5rem;
