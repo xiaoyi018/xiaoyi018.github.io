@@ -1,0 +1,49 @@
+- title: FengWu-4DVar
+  venue: ICML 2024
+  project: /projects/fengwu-4dvar/
+  image: /assets/img/research/fengwu-4dvar.png
+  width: 1350
+  height: 710
+  alt: The FengWu forecast–assimilation cycle combines observations with an AI forecast background and then predicts from the analysis state.
+  summary: Couples a differentiable weather model with 4D variational assimilation, enabling a self-contained forecast–assimilation cycle driven by observations.
+  paper: https://proceedings.mlr.press/v235/xiao24a.html
+  code: https://github.com/xiaoyi018/FengWu-4DVar
+  poster: https://icml.cc/virtual/2024/poster/33791
+  source: Framework diagram from the official ICML 2024 poster
+
+- title: VAE-Var
+  venue: ICLR 2025
+  project: /projects/vae-var/
+  image: /assets/img/research/vae-var.png
+  width: 1240
+  height: 1328
+  alt: VAE-Var uses a VAE decoder to transform a latent state into an analysis increment and updates that state using observation and background losses.
+  summary: Learns non-Gaussian background-error priors with a VAE and combines them with sparse, irregular observations through variational inference.
+  paper: https://proceedings.iclr.cc/paper_files/paper/2025/hash/9ddd5928df79a1f140ba4076978cb3ed-Abstract-Conference.html
+  code: https://github.com/xiaoyi018/VAE-Var
+  poster_file: /assets/pdf/VAE-Var_ICLR2025_Poster.pdf
+  source: Inference diagram from the ICLR 2025 poster
+
+- title: LoRA-EnVar
+  venue: NeurIPS 2025
+  project: /projects/lora-envar/
+  image: /assets/img/research/lora-envar.png
+  width: 1188
+  height: 939
+  alt: A VAE learns a climatological prior offline; low-rank decoder adapters update it online using flow-dependent ensemble error samples.
+  summary: Adapts a learned generative prior to flow-dependent ensemble uncertainty using low-rank decoder updates, with far fewer trainable parameters than full finetuning.
+  paper: https://proceedings.nips.cc/paper_files/paper/2025/hash/413885e70482b95dcbeeddc1daf39177-Abstract-Conference.html
+  poster: https://neurips.cc/virtual/2025/loc/mexico-city/poster/115029
+  source: Figure 1 from the NeurIPS paper
+
+- title: WindINR
+  venue: Preprint · 2026
+  project: /projects/windinr/
+  image: /assets/img/research/windinr.png
+  width: 1188
+  height: 474
+  alt: Terrain, coarse wind forecasts and UAV observations support continuous local wind queries for a helicopter approach in complex terrain.
+  summary: Represents local wind as a continuous neural field and corrects a compact latent state from sparse observations while keeping network weights fixed.
+  paper: https://arxiv.org/abs/2605.09511
+  code: https://github.com/xiaoyi018/windinr
+  source: Figure 1 from the supplied WindINR preprint

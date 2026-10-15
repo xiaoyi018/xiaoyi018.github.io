@@ -68,12 +68,14 @@ for (const forbiddenPath of ["_layouts", "_sass", "_scripts", "assets/tailwind",
 }
 
 // This academic site intentionally overrides only the header to keep branding
-// stable between home and subpages. Other shared runtime copies remain forbidden.
+// stable between home and subpages. Its research include is site-owned content,
+// not a copy of a shared theme component. Other runtime copies remain forbidden.
 if (exists("_includes")) {
   const entries = fs.readdirSync(path.join(root, "_includes"));
   const manifest = exists(".al-folio-overrides.yml") ? read(".al-folio-overrides.yml") : "";
-  if (entries.length !== 1 || entries[0] !== "header.liquid" || !manifest.includes("_includes/header.liquid")) {
-    failures.push("Only the acknowledged site header override is permitted in _includes.");
+  const siteIncludes = new Set(["header.liquid", "selected_research.liquid"]);
+  if (entries.some((entry) => !siteIncludes.has(entry)) || !entries.includes("header.liquid") || !manifest.includes("_includes/header.liquid")) {
+    failures.push("Only the acknowledged header override and site research content include are permitted in _includes.");
   }
 }
 
